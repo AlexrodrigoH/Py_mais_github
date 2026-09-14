@@ -1,4 +1,7 @@
 print("=== LOJA PYTHON ===")
 nome = input("Digite seu nome: ")
 print ("Bem vindo, ", nome)
+quantidade = int(input("Quantos produtos deseja comprar? "))
+print("Voce deseja comprar ", quantidade, " produtos!")
+print("tipo de variavel: ", type(quantidade))
 print("Obrigado por visitar nossa loja!")
