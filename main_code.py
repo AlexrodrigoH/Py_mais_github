@@ -1,2 +1,3 @@
 print("=== LOJA PYTHON ===")
-print("Sistema iniciado com sucesso!")
+nome = input("Digite seu nome: ")
+print ("Bem vindo, ", nome)
