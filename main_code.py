@@ -7,12 +7,12 @@ preco = float(input("Digite o preco do produto: "))
 print("Valor do produto e: R$", preco)
 total_da_compra = quantidade * preco
 print(f"O valor total da compra e: R${total_da_compra:.2f}\n")
-if total_da_compra >= 100 && total_da_compra < 200:
+if total_da_compra >= 100 and total_da_compra < 200:
     print("Voce ganhou um desconto de 10%!")
     desconto = total_da_compra * 0.10
     total_da_compra -= desconto
     print(f"Valor total a pagar com desconto: R${total_da_compra:.2f}")
-elif total_da_compra >= 200 && total_da_compra < 500:
+elif total_da_compra >= 200 and total_da_compra < 500:
     print("Voce ganhou um desconto de 20%!")
     desconto = total_da_compra * 0.20
     total_da_compra -= desconto
