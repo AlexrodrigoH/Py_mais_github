@@ -25,4 +25,4 @@ elif total_da_compra >= 500:
 else:
     print("Nenhum desconto disponivel para compras abaixo de R$100,00!")
     print(f"Valor total a pagar: R${total_da_compra:.2f}")
-print("\nObrigado por visitar nossa loja!")
+print( "\nObrigado por visitar nossa loja!" )
