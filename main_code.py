@@ -1,4 +1,5 @@
 import descontos
+import carinho
 
 print("=== LOJA PYTHON ===")
 nome = input("Digite seu nome: ")
@@ -18,3 +19,4 @@ else:
     print("Nenhum desconto aplicado.\n")
     print(f"O valor total liquido da compra e: R${total_da_compra:.2f}\n")
 print( "\nObrigado por visitar nossa loja!" )
+print(carinho.carrinho_de_compras())
