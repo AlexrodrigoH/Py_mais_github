@@ -1,3 +1,5 @@
+#from os import replace
+
 def carrinho_de_compras():
     carrinho = []
     continuar = "s"
@@ -5,16 +7,17 @@ def carrinho_de_compras():
         if continuar == "s":
            while True:
                 try:
-                    nome_produto = input("Digite o nome do produto: ")
-                    preco_produto = input("Digite o preco do produto: ")
+                    nome_produto = input("Digite o nome do produto: ").strip()
+                    preco_produto = input("Digite o preco do produto: ").strip()
                     if nome_produto == "" and preco_produto != "":
                         print("Nome do produto invalido. Digite um nome valido.\n")
                         continue
                     elif preco_produto == "" and nome_produto != "":
                         print("Preco do produto invalido. Digite um preco valido.\n")
                         continue
-                    elif preco_produto == "":
+                    elif preco_produto == "" and nome_produto == "":
                         break
+                    preco_produto = preco_produto.replace(",", ".")
                     preco_produto = float(preco_produto)
                     if preco_produto <= 0:
                         print("Preco invalido. Digite um valor positivo maior que zero.\n")
