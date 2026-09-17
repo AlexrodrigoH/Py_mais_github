@@ -3,10 +3,19 @@ def carrinho_de_compras():
     continuar = "s"
     while continuar == "s":
         if continuar == "s":
-           nome_produto = input("Digite o nome do produto: ")
            while True:
                 try:
-                    preco_produto = float(input("Digite o preco do produto: "))
+                    nome_produto = input("Digite o nome do produto: ")
+                    preco_produto = input("Digite o preco do produto: ")
+                    if nome_produto == "" and preco_produto != "":
+                        print("Nome do produto invalido. Digite um nome valido.\n")
+                        continue
+                    elif preco_produto == "" and nome_produto != "":
+                        print("Preco do produto invalido. Digite um preco valido.\n")
+                        continue
+                    elif preco_produto == "":
+                        break
+                    preco_produto = float(preco_produto)
                     if preco_produto <= 0:
                         print("Preco invalido. Digite um valor positivo maior que zero.\n")
                         continue
@@ -17,6 +26,8 @@ def carrinho_de_compras():
                     print("Preco invalido. Digite um valor numerico.\n")
         else:
             print("Finalizando a adicao de produtos ao carrinho.")
+        if not carrinho:
+            return None
         continuar = input("Deseja adicionar produto(os)? (s/n): ").lower()
         while continuar != "s" and continuar != "n":
             print("Opcao invalida. Digite 's' para sim ou 'n' para nao.")
