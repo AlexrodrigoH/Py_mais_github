@@ -33,10 +33,10 @@ def carrinho_de_compras():
             print("Opcao invalida. Digite 's' para sim ou 'n' para nao.")
             continuar = input("Deseja adicionar produto(os)? (s/n): ").lower()
     total_da_compra = 0
-    exibir = input("Deseja exibir lista do carrinho de compras? (s/n): ").lower()
     lista = 1
     for produto in carrinho:
                 total_da_compra += produto['preco']
+    exibir = input("Deseja exibir lista do carrinho de compras? (s/n): ").lower()
     if exibir == "s":
         print("\n=== CARRINHO DE COMPRAS ===")
         for produto in carrinho:
