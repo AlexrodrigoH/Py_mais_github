@@ -7,6 +7,7 @@ def carrinho_de_compras():
         if continuar == "s":
            while True:
                 try:
+                    flagS = True
                     nome_produto = input("Digite o nome do produto: ").strip()
                     preco_produto = input("Digite o preco do produto: ").strip()
                     if nome_produto == "" and preco_produto != "":
@@ -18,6 +19,15 @@ def carrinho_de_compras():
                     elif preco_produto == "" and nome_produto == "":
                         break
                     preco_produto = preco_produto.replace(",", ".")
+                    for caractere in preco_produto:
+                        if caractere in "0123456789.": #verifica se o preco do produto e valido
+                            continue
+                        else:
+                            print("\nDigite somente valor numerico para o PRECO (0123456789) separado por ponto (.)!\n")
+                            flagS = False
+                            break
+                    if flagS == False:
+                        continue
                     preco_produto = float(preco_produto)
                     if preco_produto <= 0:
                         print("Preco invalido. Digite um valor positivo maior que zero.\n")
