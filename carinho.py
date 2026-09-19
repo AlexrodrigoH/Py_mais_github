@@ -20,15 +20,15 @@ def carrinho_de_compras():
                         break
                     preco_produto = preco_produto.replace(",", ".")
                     for caractere in preco_produto:
-                        if caractere in "0123456789.": #verifica se o preco do produto e valido
-                            if preco_produto.count(".") > 1:
-                                print("\nDigite somente um ponto (.) no PRECO!\n")
-                                break
-                            continue
-                        else:
-                            print("\nDigite somente valor numerico para o PRECO (0123456789) separado por ponto (.)!\n")
+                        ponto = 0
+                        if caractere in "0123456789": #verifica se o preco do produto e valido
+                            ponto = 0
+                        elif caractere not in "0123456789.":
+                            print("Preco invalido. Digite um valor numerico valido.\n")
                             flagS = False
                             break
+                        else:
+                            continue
                     if flagS == False:
                         continue
                     preco_produto = float(preco_produto)
