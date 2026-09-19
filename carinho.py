@@ -21,6 +21,9 @@ def carrinho_de_compras():
                     preco_produto = preco_produto.replace(",", ".")
                     for caractere in preco_produto:
                         if caractere in "0123456789.": #verifica se o preco do produto e valido
+                            if preco_produto.count(".") > 1:
+                                print("\nDigite somente um ponto (.) no PRECO!\n")
+                                break
                             continue
                         else:
                             print("\nDigite somente valor numerico para o PRECO (0123456789) separado por ponto (.)!\n")
@@ -36,7 +39,7 @@ def carrinho_de_compras():
                     print(f"Produto '{nome_produto}' adicionado ao carrinho com sucesso!\n")
                     break
                 except ValueError:
-                    print("Preco invalido. Digite um valor numerico.\n")
+                    print("Preco invalido. Digite um valor numerico valido.\n")
         else:
             print("Finalizando a adicao de produtos ao carrinho.")
         if not carrinho:
