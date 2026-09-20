@@ -4,9 +4,9 @@ def carrinho_de_compras():
     while continuar == "s":
         while True:
             try:
-                flagS = True
                 nome_produto = input("Digite o nome do produto: ").strip()
                 preco_produto = input("Digite o preco do produto: ").strip()
+                encerrar = False
                 if nome_produto == "" and preco_produto != "":
                     print("Nome do produto invalido. Digite um nome valido.\n")
                     continue
@@ -14,16 +14,25 @@ def carrinho_de_compras():
                     print("Preco do produto invalido. Digite um preco valido.\n")
                     continue
                 elif preco_produto == "" and nome_produto == "":
-                    break
+                    sair = input("Deseja realmente sair do carrinho de compras? (s/n): ").lower().strip()
+                    while sair != "s" and sair != "n":
+                        print("Opcao invalida. Digite 's' para sim ou 'n' para nao.")
+                        sair = input("Deseja realmente sair do carrinho de compras? (s/n): ").lower().strip()
+                    if sair == "s":
+                        encerrar = True
+                        break
+                    else:
+                        continue
                 preco_produto = preco_produto.replace(",", ".")
+                caracteres_validos = True
                 for caractere in preco_produto:
                     if caractere in "0123456789.": #verifica se o preco do produto e valido
                         continue
                     else:
                         print("\nDigite somente valor numerico para o PRECO (0123456789) separado por ponto (.)!\n")
-                        flagS = False
+                        caracteres_validos = False
                         break
-                if flagS == False:
+                if caracteres_validos == False:
                     continue
                 preco_produto = float(preco_produto)
                 if preco_produto <= 0:
@@ -34,12 +43,14 @@ def carrinho_de_compras():
                 break
             except ValueError:
                 print("Preco invalido. Digite um valor numerico.\n")
-            if not carrinho:
-                return None
+        if encerrar == True:
+            break
         continuar = input("Deseja adicionar produto(os)? (s/n): ").lower().strip()
         while continuar != "s" and continuar != "n":
             print("Opcao invalida. Digite 's' para sim ou 'n' para nao.")
             continuar = input("Deseja adicionar produto(os)? (s/n): ").lower().strip()
+    if not carrinho:
+        return None
     total_da_compra = 0
     exibir = input("Deseja exibir lista do carrinho de compras? (s/n): ").lower().strip()
     while exibir != "s" and exibir != "n":
