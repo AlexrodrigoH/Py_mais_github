@@ -4,58 +4,65 @@ def carrinho_de_compras():
     while continuar == "s":
         while True:
             try:
-                nome_produto = input("Digite o nome do produto: ").strip()
-                repetido = False
-                for produto in carrinho:
-                    if produto['nome'].lower() == nome_produto.lower():
-                        print("Produto ja adicionado ao carrinho.\n")
-                        repetido = True
-                        break
-                if repetido:
-                    continue
-                preco_produto = input("Digite o preco do produto: ").strip()
-                encerrar = False
-                if nome_produto == "" and preco_produto != "":
-                    print("Nome do produto invalido. Digite um nome valido.\n")
-                    continue
-                elif preco_produto == "" and nome_produto != "":
-                    print("Preco do produto invalido. Digite um preco valido.\n")
-                    continue
-                elif preco_produto == "" and nome_produto == "":
-                    sair = input("Deseja realmente sair do carrinho de compras? (s/n): ").lower().strip()
-                    while sair != "s" and sair != "n":
-                        print("Opcao invalida. Digite 's' para sim ou 'n' para nao.")
+                while True:
+                    nome_produto = input("Digite o nome do produto: ").strip()
+                    nome_produto = " ".join(nome_produto.split())
+                    repetido = False
+                    for produto in carrinho:
+                        if produto['nome'].lower() == nome_produto.lower():
+                            print("Produto ja exite no carrinho.\n")
+                            repetido = True
+                            break
+                    if repetido:
+                        continue
+                    encerrar = False
+                    if nome_produto == "":
                         sair = input("Deseja realmente sair do carrinho de compras? (s/n): ").lower().strip()
-                    if sair == "s":
-                        encerrar = True
-                        break
-                    else:
+                        while sair != "s" and sair != "n":
+                            print("Opcao invalida. Digite 's' para sim ou 'n' para nao.")
+                            sair = input("Deseja realmente sair do carrinho de compras? (s/n): ").lower().strip()
+                        if sair == "s":
+                            encerrar = True
+                            break
+                        else:
+                            continue
+                    letra_valida = False
+                    caracteres_validos = True
+                    for caractere in nome_produto:
+                        if caractere.isalpha(): #verifica se o nome do produto e valido
+                            letra_valida = True
+                        elif caractere.isdigit() or caractere.isspace():
+                            continue
+                        else:
+                            caracteres_validos = False
+                            break
+                    if letra_valida == False or caracteres_validos == False:
+                        print("\nDigite somente letras, numeros e espacos para o NOME do produto!\n")
                         continue
-                letra_valida = False
-                caracteres_validos = True
-                for caractere in nome_produto:
-                    if caractere.isalpha(): #verifica se o nome do produto e valido
-                        letra_valida = True
-                    elif caractere.isdigit() or caractere.isspace():
+                    break
+                while True:
+                    preco_produto = input("Digite o preco do produto: ").strip()
+                    preco_produto = preco_produto.replace(" ", "")
+                    preco_produto = preco_produto.replace(",", ".")
+                    if preco_produto == "":
+                        print("Preco do produto invalido. Digite um preco valido.\n")
                         continue
-                    else:
-                        caracteres_validos = False
-                        break
-                if letra_valida == False or caracteres_validos == False:
-                    print("\nDigite somente letras, numeros e espacos para o NOME do produto!\n")
-                    continue
-                preco_produto = preco_produto.replace(",", ".")
-                caracteres_validos = True
-                for caractere in preco_produto:
-                    if caractere in "0123456789.": #verifica se o preco do produto e valido
+                    caracteres_validos = True
+                    for caractere in preco_produto:
+                        if caractere in "0123456789.": #verifica se o preco do produto e valido
+                            continue
+                        else:
+                            caracteres_validos = False  
+                            break
+                    try:
+                        preco_produto = float(preco_produto)
+                    except ValueError:
+                        print("Preco invalido. Digite um valor valido (EX: 12.99)!\n")
                         continue
-                    else:
+                    if caracteres_validos == False:
                         print("\nDigite somente valor numerico para o PRECO (0123456789) separado por ponto (.)!\n")
-                        caracteres_validos = False
-                        break
-                if caracteres_validos == False:
-                    continue
-                preco_produto = float(preco_produto)
+                        continue
+                    break
                 if preco_produto <= 0:
                     print("Preco invalido. Digite um valor positivo maior que zero.\n")
                     continue
