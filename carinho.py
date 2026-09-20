@@ -23,6 +23,19 @@ def carrinho_de_compras():
                         break
                     else:
                         continue
+                letra_valida = False
+                caracteres_validos = True
+                for caractere in nome_produto:
+                    if caractere.isalpha(): #verifica se o nome do produto e valido
+                        letra_valida = True
+                    elif caractere.isdigit() or caractere.isspace():
+                        continue
+                    else:
+                        caracteres_validos = False
+                        break
+                if letra_valida == False or caracteres_validos == False:
+                    print("\nDigite somente letras, numeros e espacos para o NOME do produto!\n")
+                    continue
                 preco_produto = preco_produto.replace(",", ".")
                 caracteres_validos = True
                 for caractere in preco_produto:
@@ -48,14 +61,14 @@ def carrinho_de_compras():
         continuar = input("Deseja adicionar produto(os)? (s/n): ").lower().strip()
         while continuar != "s" and continuar != "n":
             print("Opcao invalida. Digite 's' para sim ou 'n' para nao.")
-            continuar = input("Deseja adicionar produto(os)? (s/n): ").lower().strip()
+            continuar = input("\nDeseja adicionar produto(os)? (s/n): \n").lower().strip()
     if not carrinho:
         return None
     total_da_compra = 0
-    exibir = input("Deseja exibir lista do carrinho de compras? (s/n): ").lower().strip()
+    exibir = input("\nDeseja exibir lista do carrinho de compras? (s/n): \n").lower().strip()
     while exibir != "s" and exibir != "n":
                 print("Opcao invalida. Digite 's' para sim ou 'n' para nao.")
-                exibir = input("Deseja exibir lista do carrinho de compras? (s/n): ").lower().strip()
+                exibir = input("\nDeseja exibir lista do carrinho de compras? (s/n): \n").lower().strip()
     lista = 1
     for produto in carrinho:
         total_da_compra += produto['preco']
