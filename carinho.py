@@ -5,6 +5,14 @@ def carrinho_de_compras():
         while True:
             try:
                 nome_produto = input("Digite o nome do produto: ").strip()
+                repetido = False
+                for produto in carrinho:
+                    if produto['nome'].lower() == nome_produto.lower():
+                        print("Produto ja adicionado ao carrinho.\n")
+                        repetido = True
+                        break
+                if repetido:
+                    continue
                 preco_produto = input("Digite o preco do produto: ").strip()
                 encerrar = False
                 if nome_produto == "" and preco_produto != "":
