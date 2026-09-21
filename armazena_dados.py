@@ -1,0 +1,2 @@
+def armazenar_produtos():
+    
