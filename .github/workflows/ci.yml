@@ -13,6 +13,5 @@ jobs:
           python-version: '3.x'
       - name: Verificar versao do python
         run: python --version
-        name: Verifica sintaxe do projeto
+      - name: Verifica sintaxe do projeto
         run: python -m compileall .
-        
