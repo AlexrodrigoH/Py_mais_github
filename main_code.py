@@ -1,5 +1,6 @@
 import descontos
 import carinho
+import armazena_dados
 
 print("=== LOJA PYTHON ===")
 total_bruto = carinho.carrinho_de_compras()
