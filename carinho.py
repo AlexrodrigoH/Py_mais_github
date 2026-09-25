@@ -1,10 +1,18 @@
 import armazena_dados
+import msvcrt
 
 def carrinho_de_compras():
     carrinho = []
-    novo_produto = []
-    continuar = "s"
-    while continuar == "s":
+    estoque = []
+    separado = armazena_dados.ler_dados().split("\n")
+    for produto_s in separado:
+        if produto_s == "":
+                    continue
+        produto_separado = produto_s.split(";")
+        preco = float(produto_separado[1])
+        nome = produto_separado[0]
+        estoque.append({"nome": nome, "preco": preco})
+    while True:
         while True:
             try:
                 while True:
@@ -80,8 +88,7 @@ def carrinho_de_compras():
                     if preco_produto <= 0:
                         print("Preco invalido. Digite um valor positivo maior que zero.\n")
                         continue
-                    novo_produto.append({"nomeNew": nome_produto, "preco": preco_produto})
-                    carrinho.append({"nome": nome_produto, "preco": preco_produto})
+                    estoque.append({"nomeNew": nome_produto, "preco": preco_produto})
                     armazena_dados.armazenar_produtos(nome_produto, preco_produto)
                     print(f"Produto '{nome_produto}' adicionado ao carrinho com sucesso!\n")
                     continuar = input("Deseja adicionar produto(os)? (s/n): ").lower().strip()
@@ -91,25 +98,44 @@ def carrinho_de_compras():
                     break
                 #======VER OS PRODUTOS DA LISTA======
                 elif escolha == 2:
-                    separado = armazena_dados.ler_dados().split("\n")
-                    for produto_s in separado:
-                        if produto_s == "":
-                                    continue
-                        produto_separado = produto_s.split(";")
-                        preco = float(produto_separado[1])
-                        nome = produto_separado[0]
-                        carrinho.append({"nome": nome, "preco": preco})
-                    total_da_compra = 0
                     lista = 1
-                    #for produto in carrinho:
-                     #   total_da_compra += produto["preco"]
                     print("\n=== PRODUTOS EM ESTOQUE ===")
-                    for produto in carrinho:
+                    for produto in estoque:
                         print(f"{lista} - Produto: {produto['nome']}, Preco: R${produto['preco']:.2f}")
                     
                         lista += 1
                     print("\n")
-                    #return total_da_compra
+                #======ADICIONAR PRODUTOS AO CARRINHO======
+                elif escolha == 3:
+                    while True:
+                        
+                        while True:
+                            print("Informe o NUMERO do produto que deseja adicionar: \n")
+                            print("Para sair precione 'ESC'!\nPara continuar precione 'ENTER'!")
+                            tecla = msvcrt.getch()
+                            if tecla == b"\x1b":
+                                if not carrinho:
+                                    return None
+                                else:
+                                    print("exibindo produtos: \n")
+                                    lista = 1
+                                    total_da_compra = 0
+                                    for produto in carrinho:
+                                        print(f"{lista} - produto: {produto['nome']}: R${produto['preco']:.2f}\n")
+                                        lista+= 1
+                                        total_da_compra += produto["preco"]
+                                    return total_da_compra
+                            else:
+                                opcao = input("Produto: \n").strip().lower()
+                                if not opcao.isdigit():
+                                    print("informe somente produtos correspondentes a numeros da lista!")
+                                    continue
+                                opcao = int(opcao)
+                                if opcao > len(estoque) or opcao <= 0:
+                                    print("Nosso estoque posssui ", len(estoque), " produtos!\n")
+                                    continue
+                                else:
+                                    carrinho.append(estoque[opcao-1])                     
             except ValueError:
                     print("Preco invalido. Digite um valor numerico.\n")
         if encerrar == True:
