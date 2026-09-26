@@ -7,3 +7,5 @@ def ler_dados():
     ler_arquivo = arquivo.read()
     arquivo.close()
     return ler_arquivo
+def apagar_produto(qual_produto):
+    arquivo = open("produtos.txt", "w")
