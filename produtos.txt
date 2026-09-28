@@ -1,11 +1,5 @@
-mouse;250.98
-teclado;125.37
 monitor;899.9
-TESTE1;100
-TESTE2;200
-banana;2.99
-boi;299.4
-TESTE03;1.99
-testeADICIONAR;100.0
-testeDebug;1.0
-asd;12.0
+teclado;222.0
+banana;32.0
+mouse;22.0
+barganha;32.0

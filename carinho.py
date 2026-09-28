@@ -18,31 +18,34 @@ def carrinho_de_compras():
         try:
             while True:
                 print("============ MENU ============")
-                escolha = int(input("1- Adicionar produto ao estoque \n2- Ver produtos em estoque \n3- Adicionar ao carrinho\n4- apagar produtos \n5- sair "))
+                escolha = input("1- Adicionar produto ao estoque \n2- Ver produtos em estoque \n3- Adicionar ao carrinho\n4- apagar produtos \n5- sair ")
+                if not escolha.isdigit():
+                    print("Somente numeros e permitido!\n")
+                    continue
+                escolha = int(escolha)
                 if escolha <= 0 or escolha > 5:
-                    print("Escolha somente as opcoes 1, 2.... do menu!")
+                    print("Escolha somente as opcoes 1, 2.... do menu!\n")
                     continue
                 break
             #======ADICIONA PRODUTOS AO ESTOQUE======
             if escolha == 1:
                 while True:
                     print("PARA SAIR NAO INFORME NENHUM PRODUTO (PRECIONE ENTER)\n")
-                    nome_produto = input("Digite o nome do produto: ").strip()
+                    nome_produto = input("Digite o nome do produto: ").strip().lower()
                     nome_produto = " ".join(nome_produto.split())
                     repetido = False
-                    for produto in carrinho:
-                        if produto['nome'].lower() == nome_produto.lower():
-                            print("Produto ja exite no carrinho.\n")
+                    for produto in estoque:
+                        if produto['nome'] == nome_produto:
+                            print("Produto ja exite no estoque.\n")
                             repetido = True
                             break
-                    if repetido:
-                        continue
+                    if repetido == True: continue
                     encerrar = False
                     if nome_produto == "":
-                        sair = input("Deseja realmente sair do carrinho de compras? (s/n): ").lower().strip()
+                        sair = input("Deseja realmente sair do estoque? (s/n): ").lower().strip()
                         while sair != "s" and sair != "n":
                             print("Opcao invalida. Digite 's' para sim ou 'n' para nao.")
-                            sair = input("Deseja realmente sair do carrinho de compras? (s/n): ").lower().strip()
+                            sair = input("Deseja realmente sair do estoque? (s/n): ").lower().strip()
                         if sair == "s":
                             encerrar = True
                             break
@@ -90,7 +93,7 @@ def carrinho_de_compras():
                 if preco_produto <= 0:
                     print("Preco invalido. Digite um valor positivo maior que zero.\n")
                     continue
-                estoque.append({"nomeNew": nome_produto, "preco": preco_produto})
+                estoque.append({"nome": nome_produto, "preco": preco_produto})
                 armazena_dados.armazenar_produtos(nome_produto, preco_produto)
                 subprocess.run("cls", shell=True)
                 print(f"Produto '{nome_produto}' adicionado ao carrinho com sucesso!\n")
@@ -100,7 +103,6 @@ def carrinho_de_compras():
                 print("\n=== PRODUTOS EM ESTOQUE ===")
                 for produto in estoque:
                     print(f"{lista} - Produto: {produto['nome']}, Preco: R${produto['preco']:.2f}")
-                
                     lista += 1
                 print("\n")
             #======ADICIONAR PRODUTOS AO CARRINHO======
@@ -114,7 +116,8 @@ def carrinho_de_compras():
                             break
                         else:
                             print("Exibindo produtos: \n")
-                            for produto in carrinho:
+                            for produto in estoque:
+                                print("Codigo   ")
                                 print(f"{lista} - produto: {produto['nome']}: R${produto['preco']:.2f}\n")
                                 lista+= 1
                         break
@@ -132,6 +135,16 @@ def carrinho_de_compras():
                             carrinho.append(estoque[opcao-1])
                             subprocess.run("cls", shell=True)
                             print("\n-->> Produto adicionado com sucesso!!\n")                   
+            #Apagar produtos determinado
+            elif escolha == 4:
+                estoque_temp = []
+                excluir = input("Informe o codigo do produto para excluir: ").strip().lower()
+                for produto in estoque:
+                    if produto == estoque[int(excluir)-1]:
+                        continue
+                    else:
+                        estoque_temp.append(produto)
+                armazena_dados.apagar_produto(estoque_temp)
             elif escolha == 5:
                 subprocess.run("cls", shell=True)
                 print(">>>> ENCERRANDO <<<<")
